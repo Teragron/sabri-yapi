@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sabri Yapı</title>
+<meta name="description" content="Sabri Yapı — konut, ticari yapı, tadilat ve proje yönetimi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F1EA;
+    --bg-alt:#EFE8DF;
+    --ink:#1F1B17;
+    --muted:#6B625A;
+    --line:#DDD3C7;
+    --bronze:#A3693F;
+    --bronze-dark:#8A5632;
+    --white:#FFFDF9;
+    --serif:"Cormorant Garamond", Georgia, serif;
+    --sans:"DM Sans", system-ui, sans-serif;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+
+  /* Demo ribbon */
+  .demo-bar a{text-decoration:underline;color:#fff;white-space:nowrap}
+  .logo img{max-height:54px;width:auto}
+  .foot .logo img{max-height:44px}
+  .demo-bar{background:var(--ink);color:#E9DFD3;font-size:12px;letter-spacing:.04em;text-align:center;padding:7px 16px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(246,241,234,.92);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+  header.scrolled{border-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:88px}
+  .logo{display:flex;flex-direction:column;align-items:center;line-height:1}
+  .logo .main{font-family:var(--serif);font-size:30px;letter-spacing:.32em;font-weight:500;margin-right:-.32em}
+  .logo .main span{color:var(--bronze)}
+  .logo .sub{font-size:10px;letter-spacing:.55em;color:var(--bronze);margin-top:7px;margin-right:-.55em;font-weight:500}
+  .menu{display:flex;gap:38px;font-family:var(--serif);font-size:17px}
+  .menu a{position:relative;padding:4px 0}
+  .menu a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--bronze);transition:width .3s}
+  .menu a:hover::after{width:100%}
+  .nav-right{display:flex;align-items:center;gap:22px}
+  .lang{display:flex;gap:2px;font-size:12px;letter-spacing:.08em}
+  .lang button{background:none;border:0;cursor:pointer;padding:4px 6px;color:var(--muted);font:inherit}
+  .lang button.on{color:var(--ink);font-weight:600}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:14px;font-weight:500;padding:14px 28px;border:1px solid var(--bronze);transition:all .25s;cursor:pointer}
+  .btn-fill{background:var(--bronze);color:#fff}
+  .btn-fill:hover{background:var(--bronze-dark);border-color:var(--bronze-dark)}
+  .btn-line{color:var(--bronze);background:transparent}
+  .btn-line:hover{background:var(--bronze);color:#fff}
+  .burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;position:relative}
+  .burger span{position:absolute;left:9px;right:9px;height:1.5px;background:var(--ink);transition:.3s}
+  .burger span:nth-child(1){top:14px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:26px}
+  .burger.open span:nth-child(1){top:20px;transform:rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){top:20px;transform:rotate(-45deg)}
+
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1fr 1.15fr;min-height:620px}
+  .hero-text{display:flex;flex-direction:column;justify-content:center;padding:64px 56px 64px max(32px, calc((100vw - var(--max))/2 + 32px))}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--ink);overflow:hidden}
+  .eyebrow .row{display:flex;flex-wrap:wrap;margin-left:-28px;row-gap:4px}
+  .eyebrow .row span{position:relative;padding-left:28px}
+  .eyebrow .row span::before{content:"";position:absolute;left:11px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:var(--bronze)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,5.4vw,72px);line-height:1.05;margin:26px 0 26px;letter-spacing:-.01em}
+  h1 em{font-style:normal;color:var(--bronze)}
+  .lead{color:var(--muted);max-width:400px;margin-bottom:38px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-img{position:relative;overflow:hidden;background:#cbbfb1}
+  .hero-img img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;animation:zoom 14s ease-out forwards}
+  @keyframes zoom{from{transform:scale(1.08)}to{transform:scale(1)}}
+  .hero-badge{position:absolute;left:0;bottom:0;background:var(--white);padding:22px 30px;display:flex;gap:36px}
+  .hero-badge b{display:block;font-family:var(--serif);font-size:34px;font-weight:500;line-height:1;color:var(--bronze)}
+  .hero-badge small{font-size:12px;color:var(--muted)}
+
+  /* Sections */
+  section{padding:96px 0}
+  .alt{background:var(--bg-alt)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3.4vw,44px);line-height:1.1;position:relative;padding-bottom:18px}
+  h2::after{content:"";position:absolute;left:0;bottom:0;width:28px;height:1px;background:var(--bronze)}
+  .link-arrow{color:var(--bronze);font-size:14px;display:inline-flex;gap:10px;align-items:center;white-space:nowrap}
+  .link-arrow svg{transition:transform .25s}
+  .link-arrow:hover svg{transform:translateX(4px)}
+
+  /* Services */
+  .services{display:grid;grid-template-columns:repeat(4,1fr)}
+  .svc{padding:8px 32px 8px;border-left:1px solid var(--line)}
+  .svc:first-child{border-left:0;padding-left:0}
+  .svc svg.ic{width:44px;height:44px;stroke:var(--bronze);fill:none;stroke-width:1.1;margin-bottom:26px}
+  .svc h3{font-family:var(--serif);font-weight:500;font-size:24px;margin-bottom:12px}
+  .svc p{color:var(--muted);font-size:14px;margin-bottom:22px;min-height:68px}
+  .svc .link-arrow{font-size:13px}
+
+  /* Projects */
+  .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .proj .ph{overflow:hidden;aspect-ratio:4/3;background:#cbbfb1}
+  .proj img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .proj:hover img{transform:scale(1.05)}
+  .proj h3{font-family:var(--serif);font-weight:500;font-size:22px;margin:18px 0 4px}
+  .meta{font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .meta i{width:3px;height:3px;border-radius:50%;background:var(--bronze);display:inline-block}
+
+  /* Process */
+  .process{display:grid;grid-template-columns:repeat(4,1fr)}
+  .step{padding:4px 32px;border-left:1px solid var(--line);position:relative}
+  .step:first-child{border-left:0;padding-left:0}
+  .step .num{font-family:var(--serif);font-size:30px;color:var(--bronze);line-height:1}
+  .step h3{font-family:var(--serif);font-weight:500;font-size:23px;margin:12px 0 8px}
+  .step p{color:var(--muted);font-size:14px}
+
+  /* About strip */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+  .about .ph{aspect-ratio:5/4;overflow:hidden;background:#cbbfb1}
+  .about .ph img{width:100%;height:100%;object-fit:cover}
+  .about p{color:var(--muted);margin:22px 0 32px;max-width:480px}
+  .sign{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink)}
+  .sign small{display:block;font-family:var(--sans);font-style:normal;font-size:12px;color:var(--muted);letter-spacing:.06em;margin-top:2px}
+
+  /* Contact */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+  .lead2{color:var(--muted);margin:22px 0 28px;max-width:440px}
+  .quick{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+  .map{border:1px solid var(--line);background:#E4DBCF;aspect-ratio:16/9}
+  .map iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.35) sepia(.12)}
+  .note{font-size:12px;color:var(--muted);margin-top:10px}
+  form{background:var(--white);padding:40px;border:1px solid var(--line);display:grid;gap:22px}
+  label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:grid;gap:6px;font-weight:600}
+  input,select,textarea{font:inherit;font-size:16px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);padding:8px 0;outline:0;border-radius:0;width:100%}
+  input:focus,select:focus,textarea:focus{border-color:var(--bronze)}
+  textarea{resize:vertical;min-height:90px}
+  form .btn{justify-self:start}
+  .form-ok{display:none;font-size:14px;color:var(--bronze-dark)}
+  form.sent .form-ok{display:block}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);background:var(--ink);color:#F3EADF;font-size:13px;padding:12px 20px;opacity:0;pointer-events:none;transition:.3s;z-index:70;width:max-content;max-width:calc(100vw - 32px);text-align:center}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* CTA */
+  .cta{background:var(--bg-alt);padding:56px 0}
+  .cta .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .cta h2{padding:0;font-size:clamp(28px,3vw,38px)}
+  .cta h2::after{display:none}
+
+  /* Footer */
+  footer{padding:56px 0 28px}
+  .foot{display:grid;grid-template-columns:1.2fr 1.4fr 1.2fr auto;gap:40px;align-items:center;padding-bottom:36px;border-bottom:1px solid var(--line)}
+  .foot .logo{align-items:flex-start}
+  .foot .logo .main{font-size:24px}
+  .fitem{display:flex;gap:12px;font-size:13px;color:var(--muted);align-items:flex-start;border-left:1px solid var(--line);padding-left:28px}
+  .fitem svg{flex:none;width:16px;height:16px;stroke:var(--bronze);fill:none;stroke-width:1.5;margin-top:2px}
+  .social{display:flex;gap:22px}
+  .social svg{width:18px;height:18px;fill:var(--ink);transition:fill .2s}
+  .social a:hover svg{fill:var(--bronze)}
+  .legal{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);padding-top:22px;gap:16px;flex-wrap:wrap}
+  .legal div{display:flex;gap:28px}
+
+  /* WhatsApp */
+  .wa{position:fixed;right:22px;bottom:22px;width:54px;height:54px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:60;transition:transform .2s}
+  .wa:hover{transform:scale(1.07)}
+  .wa svg{width:28px;height:28px;fill:#fff}
+
+  /* Reveal */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
+  .rv.in{opacity:1;transform:none}
+
+  /* Responsive */
+  @media (max-width:1020px){
+    .menu{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 32px 24px;transform:translateY(-12px);opacity:0;pointer-events:none;transition:.3s;font-size:22px}
+    .menu.open{transform:none;opacity:1;pointer-events:auto}
+    .menu a{padding:14px 0;border-bottom:1px solid var(--line)}
+    .burger{display:block}
+    .nav-right .btn{display:none}
+    .hero{grid-template-columns:1fr}
+    .hero-text{padding:56px 32px 48px}
+    .hero-img{height:420px}
+    .services,.process{grid-template-columns:1fr 1fr;row-gap:44px}
+    .svc:nth-child(3),.step:nth-child(3){border-left:0;padding-left:0}
+    .projects{grid-template-columns:1fr 1fr}
+    .about,.contact{grid-template-columns:1fr;gap:40px}
+    .foot{grid-template-columns:1fr 1fr}
+    .fitem{border-left:0;padding-left:0}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 16px}
+    .hero-text{padding:44px 16px 40px}
+    .menu{padding:8px 16px 24px}
+    .nav{height:80px}
+    .logo .main{font-size:24px}
+    section{padding:72px 0}
+    .sec-head{flex-direction:column;align-items:flex-start;margin-bottom:36px}
+    .services,.process,.projects{grid-template-columns:1fr}
+    .svc,.step{border-left:0;padding:0 0 32px;border-bottom:1px solid var(--line)}
+    .svc:last-child,.step:last-child{border-bottom:0}
+    .svc p{min-height:0}
+    .hero-img{height:320px}
+    .hero-badge{padding:16px 20px;gap:24px}
+    .hero-badge b{font-size:28px}
+    .foot{grid-template-columns:1fr}
+    .btn{padding:13px 22px}
+    .hero-cta .btn{flex:1;justify-content:center}
+    .cta .btn{width:100%;justify-content:center}
+    form{padding:24px}
+    .quick .btn{flex:1;justify-content:center;padding:13px 12px;white-space:nowrap}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar"><span data-i18n="demo">Tasarım önizlemesi — görseller ve metinler örnek amaçlıdır</span> · <a href="panel.html" data-i18n="panel">Yönetim panelini deneyin →</a></div>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="Sabri Yapı">
+      <span class="main">S<span>A</span>BRİ</span>
+      <span class="sub">YAPI</span>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#kurumsal" data-i18n="nav1">Kurumsal</a>
+      <a href="#hizmetler" data-i18n="nav2">Hizmetler</a>
+      <a href="#projeler" data-i18n="nav3">Projeler</a>
+      <a href="#surec" data-i18n="nav4">Süreç</a>
+      <a href="#iletisim" data-i18n="nav5">İletişim</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Dil">
+        <button class="on" data-lang="tr">TR</button><button data-lang="en">EN</button>
+      </div>
+      <a href="#iletisim" class="btn btn-line" data-i18n="quote">Teklif Al</a>
+      <button class="burger" id="burger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-text">
+      <div class="eyebrow"><div class="row"><span data-i18n="e1">İnşaat</span><span data-i18n="e2">Tadilat</span><span data-i18n="e3">Proje Yönetimi</span></div></div>
+      <h1><span data-i18n="h1a">Sağlam temeller.</span><br><span data-i18n="h1b">Özenli işçilik.</span><br><em data-i18n="h1c">Kalıcı değerler.</em></h1>
+      <p class="lead" data-i18n="lead">Sabri Yapı, mühendislik disiplinini titiz işçilikle birleştirerek konut ve ticari yapıları ilk çizimden anahtar teslimine kadar güvenle hayata geçirir.</p>
+      <div class="hero-cta">
+        <a href="#hizmetler" class="btn btn-fill" data-i18n="cta1">Hizmetlerimiz</a>
+        <a href="#projeler" class="btn btn-line" data-i18n="cta2">Projeleri İncele</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="img/hero.jpg" alt="Aydınlatılmış cepheli modern konut binası">
+    </div>
+  </div>
+
+  <section class="alt" id="hizmetler">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2 data-i18n="s1">Uçtan uca uzmanlık.</h2>
+        <a href="#" class="link-arrow"><span data-i18n="s1l">Tüm hizmetlerimizi keşfedin</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+      </div>
+      <div class="services">
+        <div class="svc rv">
+          <svg class="ic" viewBox="0 0 44 44"><path d="M8 40V14l10-6v32M18 40V18h10v22M28 40V24h8v16M4 40h36"/><path d="M12 18h2M12 24h2M12 30h2M22 24h2M22 30h2"/></svg>
+          <h3 data-i18n="sv1">Konut İnşaatı</h3>
+          <p data-i18n="sv1p">Villa ve apartman projelerinde statik güvenlik ve yaşam konforunu bir arada sunan yapılar.</p>
+          <a href="#" class="link-arrow"><span data-i18n="more">Detaylı bilgi</span><svg width="14" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+        </div>
+        <div class="svc rv">
+          <svg class="ic" viewBox="0 0 44 44"><rect x="6" y="6" width="32" height="32"/><path d="M6 20h14V6M20 28h18M26 28v10M12 26v6h4"/></svg>
+          <h3 data-i18n="sv2">Ticari Yapılar</h3>
+          <p data-i18n="sv2p">Ofis, mağaza ve iş yerleri için işlevsel, dayanıklı ve marka değerini yansıtan çözümler.</p>
+          <a href="#" class="link-arrow"><span data-i18n="more">Detaylı bilgi</span><svg width="14" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+        </div>
+        <div class="svc rv">
+          <svg class="ic" viewBox="0 0 44 44"><path d="M10 40V18a12 12 0 0 1 24 0v22M16 40V20a6 6 0 0 1 12 0v20M6 40h32"/></svg>
+          <h3 data-i18n="sv3">Tadilat & Renovasyon</h3>
+          <p data-i18n="sv3p">Mevcut yapıları güçlendirerek ve yenileyerek mekânlara yeni bir yaşam kazandırıyoruz.</p>
+          <a href="#" class="link-arrow"><span data-i18n="more">Detaylı bilgi</span><svg width="14" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+        </div>
+        <div class="svc rv">
+          <svg class="ic" viewBox="0 0 44 44"><path d="M8 30a14 14 0 0 1 28 0M4 30h36v4H4zM22 16v-6M18 10h8M15 30v-8M29 30v-8"/></svg>
+          <h3 data-i18n="sv4">Proje Yönetimi</h3>
+          <p data-i18n="sv4p">Planlamadan teslimata kadar maliyet, zaman ve kalite kontrolünü tek elden yönetiyoruz.</p>
+          <a href="#" class="link-arrow"><span data-i18n="more">Detaylı bilgi</span><svg width="14" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projeler">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2 data-i18n="s2">Öne Çıkan Projeler</h2>
+        <a href="#" class="link-arrow"><span data-i18n="s2l">Tüm projeleri görüntüle</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+      </div>
+      <div class="projects">
+        <a href="#" class="proj rv">
+          <div class="ph"><img loading="lazy" src="img/proje-konut.jpg" alt="Beyaz cepheli modern konut"></div>
+          <h3><span data-i18n="p0">Örnek Proje</span> 01</h3>
+          <div class="meta"><span data-i18n="t1">Konut</span></div>
+        </a>
+        <a href="#" class="proj rv">
+          <div class="ph"><img loading="lazy" src="img/proje-ic.jpg" alt="Mermer duvarlı lounge alanı"></div>
+          <h3><span data-i18n="p0">Örnek Proje</span> 02</h3>
+          <div class="meta"><span data-i18n="t2">Ticari</span></div>
+        </a>
+        <a href="#" class="proj rv">
+          <div class="ph"><img loading="lazy" src="img/proje-santiye.jpg" alt="İnşaat halindeki çok katlı bina"></div>
+          <h3><span data-i18n="p0">Örnek Proje</span> 03</h3>
+          <div class="meta"><span data-i18n="t3">Devam ediyor</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="kurumsal">
+    <div class="wrap about">
+      <div class="ph rv"><img loading="lazy" src="img/kurumsal.jpg" alt="Beton cepheli modern bina"></div>
+      <div class="rv">
+        <div class="eyebrow" data-i18n="ab0">Hakkımızda</div>
+        <h2 style="margin-top:18px" data-i18n="ab1">Mühendislikle başlayan bir güven.</h2>
+        <p data-i18n="ab2">Her projeye bir mühendisin titizliğiyle yaklaşıyoruz: doğru zemin etüdü, şeffaf bütçe, zamanında teslim. Müşterilerimizle kurduğumuz ilişki, inşa ettiğimiz yapılar kadar uzun ömürlü.</p>
+        <div class="sign">Sabrullah Yazı<small data-i18n="ab3">İNŞAAT MÜHENDİSİ · KURUCU</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="surec">
+    <div class="wrap">
+      <div class="sec-head rv"><h2 data-i18n="s3">Süreç</h2></div>
+      <div class="process">
+        <div class="step rv"><div class="num">01</div><h3 data-i18n="st1">Keşif</h3><p data-i18n="st1p">İhtiyaçları ve arsayı analiz eder, hedefleri birlikte netleştiririz.</p></div>
+        <div class="step rv"><div class="num">02</div><h3 data-i18n="st2">Tasarım & Bütçe</h3><p data-i18n="st2p">Projeyi geliştirir, kalem kalem şeffaf bir bütçe oluştururuz.</p></div>
+        <div class="step rv"><div class="num">03</div><h3 data-i18n="st3">Uygulama</h3><p data-i18n="st3p">Planlı, güvenli ve denetimli bir şantiye ile projeyi hayata geçiririz.</p></div>
+        <div class="step rv"><div class="num">04</div><h3 data-i18n="st4">Teslim</h3><p data-i18n="st4p">Kontrollerle anahtar teslim eder, uzun vadeli destek sunarız.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="iletisim">
+    <div class="wrap contact">
+      <div class="rv">
+        <div class="eyebrow" data-i18n="c0">İletişim</div>
+        <h2 style="margin-top:18px" data-i18n="ctah">Projenizi birlikte hayata geçirelim.</h2>
+        <p class="lead2" data-i18n="c1">Formu doldurun, arayın ya da WhatsApp'tan yazın; en kısa sürede dönüş yapalım.</p>
+        <div class="quick">
+          <a class="btn btn-fill" href="#" data-wa data-i18n="c2">WhatsApp'tan yazın</a>
+          <a class="btn btn-line" href="#" data-tel>05XX XXX XX XX</a>
+        </div>
+        <div class="map"><iframe title="Harita" loading="lazy" src="https://www.google.com/maps?q=T%C3%BCrkiye&z=5&output=embed"></iframe></div>
+        <p class="note" data-i18n="c3">Harita, firma adresi eklendiğinde tam konumu gösterecek.</p>
+      </div>
+      <form class="rv" id="form" novalidate>
+        <label><span data-i18n="f1">Ad Soyad</span><input name="ad" autocomplete="name" required></label>
+        <label><span data-i18n="f2">Telefon</span><input name="tel" type="tel" autocomplete="tel" required></label>
+        <label><span data-i18n="f3">Hizmet</span>
+          <select name="hizmet">
+            <option data-i18n="sv1">Konut İnşaatı</option>
+            <option data-i18n="sv2">Ticari Yapılar</option>
+            <option data-i18n="sv3">Tadilat & Renovasyon</option>
+            <option data-i18n="sv4">Proje Yönetimi</option>
+          </select>
+        </label>
+        <label><span data-i18n="f4">Mesajınız</span><textarea name="mesaj" rows="4"></textarea></label>
+        <button class="btn btn-fill" type="submit"><span data-i18n="f5">Gönder</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor"><path d="M0 5h15M11 1l4 4-4 4"/></svg></button>
+        <p class="form-ok" data-i18n="f6">Teşekkürler. Bu bir demo formudur, mesaj gönderilmedi; gerçek sitede mesajınız doğrudan Sabri Yapı'ya ulaşır.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="#top" class="logo"><span class="main">S<span>A</span>BRİ</span><span class="sub">YAPI</span></a>
+      <div class="fitem"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="addr">Adres bilgisi eklenecek</span></div>
+      <div class="fitem"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><a href="#" data-tel>05XX XXX XX XX</a><br><span id="f-mail">info@sabriyapi.com</span></span></div>
+      <div class="social">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM12 2c-2.7 0-3 0-4.1.1C3.6 2.3 2.3 3.6 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.2 4.3 1.5 5.6 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c4.3-.2 5.6-1.5 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.2-4.3-1.5-5.6-5.8-5.8C15 2 14.7 2 12 2zm0 1.8c2.7 0 3 0 4 .1 3.2.1 4 1 4.1 4.1.1 1 .1 1.3.1 4s0 3-.1 4c-.1 3.1-.9 4-4.1 4.1-1 .1-1.3.1-4 .1s-3 0-4-.1c-3.2-.1-4-1-4.1-4.1-.1-1-.1-1.3-.1-4s0-3 .1-4C3.9 4.9 4.8 4 8 3.9c1-.1 1.3-.1 4-.1z"/></svg></a>
+        <a href="#" aria-label="E-posta"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2.4V17h16V7.4l-8 5.3zM5.6 7l6.4 4.3L18.4 7z"/></svg></a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 SABRİ YAPI. <span data-i18n="rights">Tüm hakları saklıdır.</span></span>
+      <div><a href="#" data-i18n="priv">Gizlilik Politikası</a><a href="#" data-i18n="cook">Çerez Politikası</a></div>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" href="#" data-wa aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.7 17.8L0 24l6.3-1.7A11.8 11.8 0 0 0 23.8 12a11.7 11.7 0 0 0-3.4-8.4z"/></svg></a>
+
+<script>
+  // Sticky header border
+  const hdr=document.querySelector('header');
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>10),{passive:true});
+
+  // Mobile menu
+  const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+  burger.addEventListener('click',()=>{burger.classList.toggle('open');menu.classList.toggle('open')});
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');menu.classList.remove('open')}));
+
+  // Reveal on scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*80+'ms';io.observe(el)});
+
+  // Content saved in the admin panel demo (stored on this device only)
+  (function(){
+    let d={};try{d=JSON.parse(localStorage.getItem('sabriDemo'))||{}}catch(e){}
+    const grid=document.querySelector('.projects');
+    (d.projects||[]).slice().reverse().forEach(pr=>{
+      const a=document.createElement('a');a.href='#';a.className='proj';
+      const ph=document.createElement('div');ph.className='ph';const im=new Image();im.src=pr.foto;im.alt=pr.ad;ph.appendChild(im);
+      const h=document.createElement('h3');h.textContent=pr.ad;
+      const m=document.createElement('div');m.className='meta';const sp=document.createElement('span');sp.textContent=pr.tur;m.appendChild(sp);
+      a.append(ph,h,m);grid.prepend(a)});
+    if(d.logo)document.querySelectorAll('.logo').forEach(l=>{l.textContent='';const im=new Image();im.src=d.logo;im.alt='Sabri Yapı';l.appendChild(im)});
+    if(d.tel){let n=d.tel.replace(/\D/g,'');if(n.startsWith('0'))n='90'+n.slice(1);else if(!n.startsWith('90'))n='90'+n;
+      document.querySelectorAll('a[data-tel]').forEach(a=>{a.href='tel:+'+n;a.textContent=d.tel});
+      document.querySelectorAll('a[data-wa]').forEach(a=>a.href='https://wa.me/'+n)}
+    if(d.adres){const ad=document.querySelector('[data-i18n="addr"]');ad.removeAttribute('data-i18n');ad.textContent=d.adres;
+      const mp=document.querySelector('.map iframe');mp.src='https://www.google.com/maps?q='+encodeURIComponent(d.adres)+'&z=15&output=embed';
+      const nt=document.querySelector('[data-i18n="c3"]');if(nt)nt.remove()}
+    if(d.mail)document.getElementById('f-mail').textContent=d.mail;
+  })();
+
+  // TR / EN
+  const EN={
+    demo:"Design preview — images and copy are placeholders",panel:"Try the admin panel →",
+    nav1:"About",nav2:"Services",nav3:"Projects",nav4:"Process",nav5:"Contact",quote:"Get a Quote",
+    e1:"Construction",e2:"Renovation",e3:"Project Management",
+    h1a:"Solid foundations.",h1b:"Careful craftsmanship.",h1c:"Lasting value.",
+    lead:"Sabri Yapı combines engineering discipline with meticulous craftsmanship to deliver residential and commercial buildings — from first sketch to turnkey handover.",
+    cta1:"Our Services",cta2:"View Projects",b1:"Years of experience",b2:"Completed projects",
+    s1:"End-to-end expertise.",s1l:"Explore all services",
+    sv1:"Residential",sv1p:"Villas and apartment buildings that combine structural safety with everyday comfort.",
+    sv2:"Commercial",sv2p:"Functional, durable offices, shops and workplaces that reflect your brand.",
+    sv3:"Renovation",sv3p:"We strengthen and renew existing buildings, giving spaces a new life.",
+    sv4:"Project Management",sv4p:"Cost, schedule and quality managed from a single point, from planning to handover.",
+    more:"Learn more",s2:"Featured Projects",s2l:"View all projects",
+    p0:"Sample Project",t1:"Residential",t2:"Commercial",t3:"In progress",
+    ab0:"About us",ab1:"Trust that starts with engineering.",
+    ab2:"We approach every project with an engineer's rigour: proper site surveys, transparent budgets, on-time delivery. Our client relationships last as long as the buildings we create.",
+    ab3:"CIVIL ENGINEER · FOUNDER",
+    s3:"Process",st1:"Discovery",st1p:"We analyse your needs and the site, and define the goals together.",
+    st2:"Design & Budget",st2p:"We develop the design and build a transparent, itemised budget.",
+    st3:"Construction",st3p:"A planned, safe and supervised site brings the project to life.",
+    st4:"Handover",st4p:"Final inspections, turnkey delivery and long-term support.",
+    ctah:"Let's build your project together.",c0:"Contact",c1:"Fill in the form, call, or message us on WhatsApp — we will get back to you shortly.",c2:"Message on WhatsApp",c3:"The map will show the exact location once the company address is added.",f1:"Full name",f2:"Phone",f3:"Service",f4:"Your message",f5:"Send",f6:"Thank you. This is a demo form and nothing was sent; on the real site your message goes straight to Sabri Yapı.",addr:"Address to be added",
+    rights:"All rights reserved.",priv:"Privacy Policy",cook:"Cookie Policy"
+  };
+  const nodes=[...document.querySelectorAll('[data-i18n]')];
+  nodes.forEach(n=>n.dataset.tr=n.textContent);
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{
+    const l=b.dataset.lang;
+    document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('on',x===b));
+    document.documentElement.lang=l;
+    nodes.forEach(n=>{n.textContent=l==='en'?(EN[n.dataset.i18n]??n.dataset.tr):n.dataset.tr});
+  }));
+
+  // Pages that are not part of the demo
+  const toast=document.createElement('div');toast.className='toast';document.body.appendChild(toast);let tt;
+  const say=m=>{toast.textContent=m;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),2600)};
+  document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();
+    say(document.documentElement.lang==='en'?'This page is not part of the demo — it opens on the real site.':'Bu sayfa demoya dahil değil; gerçek sitede açılacak.')}));
+
+  // Demo contact form (sends nothing)
+  const form=document.getElementById('form');
+  form.addEventListener('submit',e=>{e.preventDefault();
+    if(!form.ad.value.trim()||!form.tel.value.trim()){say(document.documentElement.lang==='en'?'Please enter your name and phone.':'Lütfen adınızı ve telefonunuzu yazın.');return}
+    form.classList.add('sent');form.reset()});
+</script>
+</body>
+</html>
